@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.member.config.Member">
+
+ <insert id="insertData" parameterType="com.member.model.MemberVO">
+ insert into member(id,pass,name,addr,memo,reg_date)
+ values(#{id},#{pass},#{name},#{addr},#{memo},sysdate)
+ </insert>
+ 
+ <select id="listData" resultType="com.member.model.MemberVO">
+ select * from member
+ </select>
+ 
+ <select id="viewData" resultType="com.member.model.MemberVO">
+ select * from member where id=#{id}
+ </select>
+ 
+ <delete id="deleteData" parameterType="com.member.model.MemberVO">
+ delete from member where id=#{id}
+ </delete>
+ 
+ <update id="updateData" parameterType="com.member.model.MemberVO">
+ update member set pass=#{pass},name=#{name},addr=#{addr},memo=#{memo},reg_date=sysdate where id=#{id}
+ </update>
+ 
+ </mapper>
