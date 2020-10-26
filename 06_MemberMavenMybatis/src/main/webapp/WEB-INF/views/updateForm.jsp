@@ -13,7 +13,7 @@
 <input type="hidden" name="id" value="${member.id}">
 
 아이디:${member.id}<br>
-패스워드 : <input type="password" name="password" value=${member.pass}><br>
+패스워드 : <input type="password" name="pass" value=${member.pass}><br>
 이름: <input type="text" name="name" value=${member.name} ><br>
 주소: <input type="text" name="addr" id="addr" size="20" value=${member.name}><br>
 메모:<textarea cols=50 rows="10" name="memo"></textarea>

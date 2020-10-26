@@ -1,5 +1,6 @@
 package com.member.mymodel;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,25 +17,24 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<MemberVO>list() {
-		return dao.dao_list("listData");
+	public List<MemberVO>list(HashMap<String,String>hm) {
+		return dao.dao_list("listData",hm);
 	}
 
 	@Override
 	public MemberVO findById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.dao_findById("viewData", id);
 	}
 
 	@Override
 	public void update(MemberVO member) {
-		// TODO Auto-generated method stub
+		dao.dao_update("updateData", member);
 		
 	}
 
 	@Override
 	public void delete(String id) {
-		// TODO Auto-generated method stub
+		dao.dao_delete("deleteData", id);
 		
 	}
 

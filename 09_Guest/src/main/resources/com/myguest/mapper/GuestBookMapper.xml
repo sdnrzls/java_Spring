@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.myguest.mapper.GuestBookMapper">
+ 
+ <sql id="search">
+ 	<where>
+ 		<if test='word!=null and field == "name"'>
+ 			name like '%${word}%' <!--statement  -->
+ 		</if>
+ 		<if test='word!=null and field == "content"'>
+ 			content like '%'||#{word}||'%' <!-- PreparedStatement  -->
+ 		</if>
+ 	</where>
+ </sql>
+ 
+ <insert id="insert" parameterType="com.myguest.model.GuestBookDTO">
+ insert into guestbook values(guestbook_seq.nextval,#{name},#{content},#{grade},sysdate,#{ipaddr}
+ </insert>
+ 
+ <select id="list" resultType="com.myguest.model.GuestBookDTO" parameterType="HashMap">
+	 select * from 
+	 (select aa.*,rownum rn from
+	 (select * from guestbook <include refid="search"/>
+	 order by num desc)aa
+	 where rownum &lt;=#{endRow})
+	 where rn >=#{startRow}
+ </select>
+ 
+ <select id="count" resultType="int" parameterType="HashMap">
+ 	select count(*) from guestbook
+ 	<include refid="search"/>
+ </select>
+ 
+ <select id="view" parameterType="int" resultType="com.myguest.model.GuestBookDTO">
+ select * from guestbook where num=#{num}
+ </select>
+ 
+  <delete id="delete" parameterType="int">
+ delete from guestbook where num=#{num}
+ </delete>
+ 
+ </mapper>

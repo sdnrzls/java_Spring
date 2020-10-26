@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.person.07_person">
+ 
+ <insert id="insertData" parameterType="com.myperson.model.Person">
+ insert into person(id,name,password,gender,job)
+ values(#{id},#{name},#{password},#{gender},#{job})
+ </insert>
+ 
+ <select id="listData" resultType="com.myperson.model.Person">
+ select * from person
+ <where>
+ <if test ='word!=null and field=="name"'>
+ 	name like '%'||#{word}||'%'
+ </if>
+ <if test ='word!=null and field=="addr"'>
+ 	addr like '%'||#{word}||'%'
+ </if>
+ </where>
+ </select>
+ 
+ <select id="detailData" resultType="com.myperson.model.Person">
+ select * from person where id=#{id}
+ </select>
+ 
+ <update id="updateData" parameterType="com.myperson.model.Person">
+ update person set name=#{name},password=#{password},gender=#{gender},job=#{job} where id=#{id}
+ </update>
+ 
+ <delete id="deleteData" parameterType="com.myperson.model.Person">
+ delete from person where id=#{id}
+ </delete>
+ 
+ </mapper>

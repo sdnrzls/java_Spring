@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.myboard.mapper.BoardMapper">
+ 
+ <insert id="insert" parameterType="com.myboard.dto.BoardDTO">
+ insert into springboard values(guestbook_seq.nextval,#{title},#{content},
+ #{writer},#{regdate},#{hitcount},#{password})
+ </insert>
+ 
+ <select id="findAll" resultType="com.myboard.dto.BoardDTO"
+ parameterType="HashMap">
+ select * from springboard
+ </select>
+ 
+ <select id="findByNum" parameterType="int" resultType="com.myboard.dto.BoardDTO">
+ select * from springboard where num=#{num}
+ </select>
+ 
+ <delete id="delete" parameterType="com.myboard.dto.BoardDTO">
+ delete from springboard where num=#{num}
+ </delete>
+ 
+ <update id="update" parameterType="com.myboard.dto.BoardDTO">
+ update springboard set title=#{title},content=#{content},writer=#{writer},regdate=#{regdate},hitcount=#{hitcount} where num=#{num}
+ </update>
+ </mapper>

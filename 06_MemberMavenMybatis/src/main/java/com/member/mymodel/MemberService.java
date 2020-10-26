@@ -1,5 +1,6 @@
 package com.member.mymodel;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -8,7 +9,7 @@ public interface MemberService {
 		public void insert(MemberVO member);
 		
 		//전체보기
-		public List<MemberVO>list();
+		public List<MemberVO>list(HashMap<String,String>hm);
 		
 		//상세보기
 		public MemberVO findById(String id);

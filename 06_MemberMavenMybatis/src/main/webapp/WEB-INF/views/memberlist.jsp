@@ -18,4 +18,13 @@
 작성일:${member.reg_date}<br/>
 </c:forEach>
 </body>
+<form action="memberlist">
+<select name="field">
+	<option>선택하세요</option>
+	<option value="name">이름</option>
+	<option value="addr">주소</option>
+</select>
+<input type="text" name="word"> 
+<input type="submit" name="검색">
+</form>
 </html>

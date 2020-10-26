@@ -1,5 +1,6 @@
 package com.member.mymodel;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -8,7 +9,7 @@ public interface MemberDAO {
 		public void dao_insert(String sqlId,MemberVO member);
 		
 		//전체보기
-		public List<MemberVO>dao_list(String sqlId);
+		public List<MemberVO>dao_list(String sqlId,HashMap<String,String>hm);
 		
 		//상세보기
 		public MemberVO dao_findById(String sqlId,String id);

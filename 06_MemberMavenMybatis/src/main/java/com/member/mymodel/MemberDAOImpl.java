@@ -1,5 +1,6 @@
 package com.member.mymodel;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.ExecutorType;
@@ -22,28 +23,32 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public List<MemberVO> dao_list(String sqlId) {
+	public List<MemberVO> dao_list(String sqlId,HashMap<String,String>hm) {
 		SqlSession sess = sqlMapper.openSession(ExecutorType.REUSE);
-		List<MemberVO>list = sess.selectList(sqlId);
+		List<MemberVO>list = sess.selectList(sqlId,hm);
 		return list;
 	}
 
 	@Override
 	public MemberVO dao_findById(String sqlId,String id) {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession sess = sqlMapper.openSession(ExecutorType.REUSE);
+		MemberVO member = sess.selectOne(sqlId,id);
+		return member;
 	}
 
 	@Override
 	public void dao_update(String sqlId,MemberVO member) {
-		// TODO Auto-generated method stub
+		SqlSession sess = sqlMapper.openSession(ExecutorType.REUSE);
+		sess.insert(sqlId,member);
+		sess.commit();
 		
 	}
 
 	@Override
 	public void dao_delete(String sqlId,String id) {
-		// TODO Auto-generated method stub
-		
+		SqlSession sess = sqlMapper.openSession(ExecutorType.REUSE);
+		sess.insert(sqlId,id);
+		sess.commit();
 	}
 
 }
