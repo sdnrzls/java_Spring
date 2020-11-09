@@ -11,4 +11,5 @@ public class BoardDTO {
 	private String regdate;
 	private int hitcount;
 	private String password;
+	private int replyCnt;
 }

@@ -13,6 +13,7 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
+	
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -27,9 +28,17 @@
 				 </exclusion>
 			</exclusions>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		
+		<!--트랜잭션  -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
 		
@@ -82,6 +91,43 @@
 		    <artifactId>jackson-databind</artifactId>
 		    <version>2.11.2</version>
 		</dependency>
+		
+		<!--security-config  -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>5.0.7.RELEASE</version>
+		</dependency>
+		
+		
+		<!--security-core  -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>5.0.7.RELEASE</version>
+		</dependency>
+		
+		<!--security-taglibs  -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-taglibs</artifactId>
+		    <version>5.0.7.RELEASE</version>
+		</dependency>
+		
+		
+		<!--security-web  -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>5.0.7.RELEASE</version>
+		</dependency>
+		
+		
+		
 				
 		<!-- AspectJ -->
 		<dependency>

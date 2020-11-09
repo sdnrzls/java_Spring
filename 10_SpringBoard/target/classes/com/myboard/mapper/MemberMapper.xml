@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.myboard.mapper.MemberMapper">
+ 
+ 
+ <insert id="insert" parameterType="com.myboard.dto.MemberDTO">
+ insert into member(id,pass,name,addr,memo,reg_date)
+ values(#{id},#{pass},#{name},#{addr},#{memo},sysdate)
+ </insert>
+ 
+ 
+ <select id="Login" resultType="com.myboard.dto.MemberDTO">
+ select pass from member where id=#{id}
+ </select>
+ </mapper>

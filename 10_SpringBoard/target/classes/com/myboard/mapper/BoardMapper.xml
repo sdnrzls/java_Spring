@@ -5,13 +5,37 @@
  <mapper namespace="com.myboard.mapper.BoardMapper">
  
  <insert id="insert" parameterType="com.myboard.dto.BoardDTO">
- insert into springboard values(guestbook_seq.nextval,#{title},#{content},
- #{writer},#{regdate},#{hitcount},#{password})
+ insert into springboard values(springboard_seq.nextval,#{title},#{content},
+ #{writer},#{regdate},#{hitcount},#{password},0)
  </insert>
  
- <select id="findAll" resultType="com.myboard.dto.BoardDTO"
- parameterType="HashMap">
- select * from springboard
+  <sql id="search">
+ 	<where>
+ 		<if test='word!=null and field == "title"'>
+ 			title like '%${word}%' <!--statement  -->
+ 		</if>
+ 		<if test='word!=null and field == "writer"'>
+ 			writer like '%'||#{word}||'%' <!-- PreparedStatement  -->
+ 		</if>
+ 	</where>
+ </sql>
+ 
+ <select id="findAll" resultType="com.myboard.dto.BoardDTO" parameterType="com.myboard.util.SearchDTO">
+	 select num,title,content,writer,regdate,hitcount,password,replycnt from 
+	 (
+	 select /*+INDEX_DESC(springboard SPRINGBOARD_PK)*/
+	 rownum rn, num, title, content, writer, regdate, hitcount, password, replycnt from springboard
+	 where
+	 <include refid="search"></include>
+	 <![CDATA[
+	 	rownum <=#{pageNum}*#{amount}
+	 	)
+	 	where rn>(#{pageNum}-1)*#{amount}
+	 ]]>
+ </select>
+ 
+ <select id="getCount" resultType="int" parameterType="com.myboard.util.SearchDTO">
+ select count(*) from springboard
  </select>
  
  <select id="findByNum" parameterType="int" resultType="com.myboard.dto.BoardDTO">
@@ -25,4 +49,19 @@
  <update id="update" parameterType="com.myboard.dto.BoardDTO">
  update springboard set title=#{title},content=#{content},writer=#{writer},regdate=#{regdate},hitcount=#{hitcount} where num=#{num}
  </update>
+ 
+ <!--reply count 1 증가 -->
+ <update id="updateReplyCnt">
+ update springboard set replycnt = replycnt+#{amount}
+ where num=#{bnum}
+ </update>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  </mapper>

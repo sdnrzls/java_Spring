@@ -8,20 +8,16 @@ import org.springframework.stereotype.Repository;
 
 import com.myboard.dto.BoardDTO;
 import com.myboard.mapper.BoardMapper;
+import com.myboard.util.SearchDTO;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO{
-	@Autowired BoardMapper mapper;
+	@Autowired
+	BoardMapper mapper;
 	
-
 	@Override
 	public int dao_insert(BoardDTO board) {
 		return mapper.insert(board);
-	}
-
-	@Override
-	public List<BoardDTO> dao_findAll(HashMap<String, Object> hm) {
-		return mapper.findAll(hm);
 	}
 
 	@Override
@@ -39,4 +35,13 @@ public class BoardDAOImpl implements BoardDAO{
 		mapper.delete(num);
 	}
 
+	@Override
+	public List<BoardDTO> dao_findAll(SearchDTO dto) {
+		return mapper.findAll(dto);
+	}
+
+	@Override
+	public int getCount(SearchDTO dto) {
+		return mapper.getCount(dto);
+	}
 }

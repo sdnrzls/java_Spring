@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.myboard.dto.BoardDTO;
 import com.myboard.model.BoardService;
+import com.myboard.util.SearchDTO;
 
 
 /**
@@ -60,12 +61,14 @@ public class HomeController {
 	}
 	
 	@RequestMapping("boardlist")
-	public void list(Model model,String field,String word){
-		HashMap<String, Object>hm = new HashMap<String,Object>();
-		hm.put("field",field);
-		hm.put("word", word);
-		List<BoardDTO>plist = service.findAll(hm);
+	public String list(Model model,SearchDTO dto){
+		int count = service.getCount(dto);
+		List<BoardDTO>plist = service.findAll(dto);
+		int rowNo = count -((dto.getPageNum()-1)*10);
 		model.addAttribute("board",plist);
+		model.addAttribute("count",count);
+		model.addAttribute("rowNo",rowNo);
+		return "boardlist";
 	}
 	
 	@RequestMapping("boarddetail")
